@@ -99,6 +99,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://www.django-rest-framework.org/api-guide/settings/
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
+        "authentication.authentication.CustomJWTAuthentication",
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     )
 }
@@ -125,8 +126,8 @@ SIMPLE_JWT = {
 
 # JWT Cookie settings
 AUTH_COOKIE = "access"
-AUTH_COOKIE_ACCESS_MAX_AGE = 60 * 60 # One hour
-AUTH_COOKIE_REFRESH_MAX_AGE = 60 * 60 * 24 # One day
+AUTH_COOKIE_ACCESS_MAX_AGE = 60 * 60  # One hour
+AUTH_COOKIE_REFRESH_MAX_AGE = 60 * 60 * 24  # One day
 AUTH_COOKIE_SECURE = getenv("AUTH_COOKIE_SECURE", "False") == "True"
 AUTH_COOKIE_HTTP_ONLY = True
 AUTH_COOKIE_PATH = "/"
@@ -144,6 +145,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 STATIC_URL = "static/"
+
+
+# app/core/settings.py
+AUTH_COOKIE_ACCESS_MAX_AGE = 60 * 60  # One hour
+AUTH_COOKIE_REFRESH_MAX_AGE = 60 * 60 * 24  # One day
 
 
 # Default primary key field type

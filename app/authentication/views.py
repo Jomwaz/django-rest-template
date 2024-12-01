@@ -88,5 +88,5 @@ class LogoutView(APIView):
 
 class CustomUserViewSet(UserViewSet):
     def me(self, request, *args, **kwargs):
-        response = super().me("request", *args, **kwargs)
+        response = super().me(request, *args, **kwargs)
         return response

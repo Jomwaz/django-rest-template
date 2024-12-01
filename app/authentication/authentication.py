@@ -2,18 +2,22 @@ from django.conf import settings
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
 
-class JWTAuthentication(JWTAuthentication):
+class CustomJWTAuthentication(JWTAuthentication):
     """
+    Modified from the base JWTAuthentication class to instead
+    pull the access token value from a cookie rather than 
+    an authentication header.
+
     Add to `authentication_classes()` decorator on view classes
     to enable JWT authentication.
 
     # Usage
+
     ```
-    @authentication_classes([JWTAuthentication])
+    @authentication_classes([CustomJWTAuthentication])
     class SomeView(generics.ListCreateAPIView):
         # Add view code below...
     ```
-
     """
 
     def authenticate(self, request):
@@ -22,7 +26,7 @@ class JWTAuthentication(JWTAuthentication):
             if header is None:
                 raw_token = request.COOKIES.get(settings.AUTH_COOKIE)
             else:
-                raw_token = self.get_raw_token(header)
+                return None
 
             if raw_token is None:
                 return None
