@@ -99,7 +99,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://www.django-rest-framework.org/api-guide/settings/
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
-        "authentication.authentication.CustomJWTAuthentication",
+        'rest_framework.authentication.SessionAuthentication',
+        "authentication.authentication.CookieJWTAuthentication",
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     )
 }
@@ -128,10 +129,17 @@ SIMPLE_JWT = {
 AUTH_COOKIE = "access"
 AUTH_COOKIE_ACCESS_MAX_AGE = 60 * 60  # One hour
 AUTH_COOKIE_REFRESH_MAX_AGE = 60 * 60 * 24  # One day
-AUTH_COOKIE_SECURE = getenv("AUTH_COOKIE_SECURE", "False") == "True"
+AUTH_COOKIE_SECURE = getenv("AUTH_COOKIE_SECURE", "True") == "True"
 AUTH_COOKIE_HTTP_ONLY = True
 AUTH_COOKIE_PATH = "/"
 AUTH_COOKIE_SAMESITE = "None"
+
+
+# Session Cookie settings
+SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_HTTPONLY = True
+CSRF_USE_SESSIONS = True
+# SESSION_COOKIE_AGE = 1800 # 30 minutes
 
 
 # Internationalization

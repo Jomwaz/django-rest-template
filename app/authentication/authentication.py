@@ -2,10 +2,11 @@ from django.conf import settings
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
 
-class CustomJWTAuthentication(JWTAuthentication):
-    """
+class CookieJWTAuthentication(JWTAuthentication):
+    """JWT authentication looking for a cookie.
+
     Modified from the base JWTAuthentication class to instead
-    pull the access token value from a cookie rather than 
+    pull the access token value from a cookie rather than
     an authentication header.
 
     Add to `authentication_classes()` decorator on view classes
@@ -14,7 +15,7 @@ class CustomJWTAuthentication(JWTAuthentication):
     # Usage
 
     ```
-    @authentication_classes([CustomJWTAuthentication])
+    @authentication_classes([CookieJWTAuthentication])
     class SomeView(generics.ListCreateAPIView):
         # Add view code below...
     ```

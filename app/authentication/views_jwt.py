@@ -10,7 +10,7 @@ from rest_framework_simplejwt.views import (
 )
 
 
-class CustomTokenObtainPairView(TokenObtainPairView):
+class JwtTokenObtainPairView(TokenObtainPairView):
     def post(self, request, *args, **kwargs):
         response = super().post(request, *args, **kwargs)
 
@@ -40,7 +40,7 @@ class CustomTokenObtainPairView(TokenObtainPairView):
         return response
 
 
-class CustomTokenRefreshView(TokenRefreshView):
+class JwtTokenRefreshView(TokenRefreshView):
     def post(self, request, *args, **kwargs):
         refresh_token = request.COOKIES.get("refresh")
 
@@ -65,7 +65,7 @@ class CustomTokenRefreshView(TokenRefreshView):
         return response
 
 
-class CustomTokenVerifyView(TokenVerifyView):
+class JwtTokenVerifyView(TokenVerifyView):
     def post(self, request, *args, **kwargs):
         access_token = request.COOKIES.get("access")
 
@@ -77,7 +77,7 @@ class CustomTokenVerifyView(TokenVerifyView):
         return super().post(request, *args, **kwargs)
 
 
-class LogoutView(APIView):
+class JwtLogoutView(APIView):
     def post(self, request, *args, **kwargs):
         response = Response(status=status.HTTP_204_NO_CONTENT)
         response.delete_cookie("access")
@@ -86,7 +86,7 @@ class LogoutView(APIView):
         return response
 
 
-class CustomUserViewSet(UserViewSet):
+class JwtUserViewSet(UserViewSet):
     def me(self, request, *args, **kwargs):
         response = super().me(request, *args, **kwargs)
         return response
