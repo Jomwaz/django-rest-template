@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     "djoser",
     "accounts",
     "authentication",
+    "management",
 ]
 
 MIDDLEWARE = [
